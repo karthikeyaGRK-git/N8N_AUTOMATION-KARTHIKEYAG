@@ -1,0 +1,192 @@
+{
+  "name": "DATA TRANSFORMATION",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -336,
+        -80
+      ],
+      "id": "34ce53fa-8a4c-4e83-90b4-94bd8a724070",
+      "name": "When chat message received",
+      "webhookId": "bd8bf08b-430a-4f35-a55b-b63e88ab75b2"
+    },
+    {
+      "parameters": {
+        "operation": "getAllPeople"
+      },
+      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        -80
+      ],
+      "id": "f9095210-4d52-4cce-8483-27e8d0556b79",
+      "name": "test data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1335a24e-a757-4eab-acc5-c67acfe0349f",
+              "name": "FULL NAME",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "0f21dd41-3b91-476f-b83a-784809c89197",
+              "name": "Email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "07c30eb8-b35d-4762-bb42-33094856d260",
+              "name": "Country",
+              "value": "={{ $json.country }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        112,
+        -80
+      ],
+      "id": "1b401ed5-d48a-4e6c-98e4-f39a0abd4d8c",
+      "name": "Transform data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3b65654f-648b-4a13-a094-c07d75c0639d",
+              "leftValue": "={{ $json.Country }}",
+              "rightValue": "US",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        336,
+        -80
+      ],
+      "id": "2cc4fba7-d218-4c9b-96eb-954cbe8b7b97",
+      "name": "CHECKING"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        576,
+        -224
+      ],
+      "id": "07be0c65-51c8-4170-b490-4c579cd526b7",
+      "name": "YES"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        592,
+        144
+      ],
+      "id": "6d6d86e8-a341-4883-a2cd-a735babea50e",
+      "name": "NO"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "test data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "test data": {
+      "main": [
+        [
+          {
+            "node": "Transform data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transform data": {
+      "main": [
+        [
+          {
+            "node": "CHECKING",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CHECKING": {
+      "main": [
+        [
+          {
+            "node": "YES",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "fd3064e6-d73a-4ab7-8717-8408f01abb4b",
+  "meta": {
+    "instanceId": "79e09e4fbde8e02a54b200d19b0a9c61d58a74a04d06c25192439399bfafa121"
+  },
+  "nodeGroups": [],
+  "id": "Cm9NhbyYiQm1amCi",
+  "tags": []
+}
