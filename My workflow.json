@@ -1,0 +1,125 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "461b8a6e-21d7-4c0f-863c-acb71a194940",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        144,
+        192
+      ],
+      "id": "89824e39-0995-4f41-9a29-c20a3ba955a1",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "u8B0OXmtUXDqydsv",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "953c4ef4-ffc0-4dab-8298-0e32e7b0dd52",
+      "name": "When chat message received",
+      "webhookId": "0506768f-a141-49b3-94c4-d38cd2188a7b"
+    },
+    {
+      "parameters": {
+        "sendTo": "balemanoj776@gmail.com",
+        "subject": "TECH EVENT",
+        "emailType": "text",
+        "message": "=Tomorrow morning at 9.30 am we have event  at bay8. Padukora gandu nidraravatleda",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        224
+      ],
+      "id": "3ad4f01e-c02c-496d-ace6-fb8db76879ee",
+      "name": "Send a message in Gmail",
+      "webhookId": "903a4ff0-a3ee-46f9-a6d2-46bf6a9aa280",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lzwiErlNZmrm9JL8",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5217111a-c358-45d9-9a00-8b634f6b0528",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5141deabfe7cd17f7f20c2f4fb01b88a5171b9ff9c5fa1c1d7136ba8b99b2b7d"
+  },
+  "nodeGroups": [],
+  "id": "F953cOKpDJwVZJzK",
+  "tags": []
+}
