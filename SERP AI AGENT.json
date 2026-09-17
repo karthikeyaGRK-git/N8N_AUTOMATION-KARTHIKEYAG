@@ -1,0 +1,168 @@
+{
+  "name": "SERP AI AGENT",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "f823639d-3f48-4ebb-8c74-dd60450dfabc",
+      "name": "When chat message received",
+      "webhookId": "4790757c-e3ad-40f2-979c-f713f348e315"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        96,
+        -32
+      ],
+      "id": "28af7089-8ff4-4c8a-8061-715832934ebc",
+      "name": "KARTHIKEYA"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        112,
+        208
+      ],
+      "id": "dea33512-2c5e-45d2-90ab-f38f4436e541",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        240,
+        208
+      ],
+      "id": "d31aec2f-69f0-468b-94e9-f7ea481fc302",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "q": "coffee",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        368,
+        208
+      ],
+      "id": "45dffb1e-d07b-47df-8523-6d9aa858050e",
+      "name": "Google search in SerpApi",
+      "credentials": {
+        "serpApi": {
+          "id": "2Mb40fNaM8WUtAV2",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAlibabaCloud",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        208
+      ],
+      "id": "976d375d-0c94-4f86-83be-8d8990a6be48",
+      "name": "Qwen Cloud Chat Model",
+      "credentials": {
+        "alibabaCloudApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "KARTHIKEYA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "KARTHIKEYA",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "KARTHIKEYA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "KARTHIKEYA",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qwen Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "KARTHIKEYA",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "caa1d8ff-6624-4316-8417-4ba8c98d6255",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5141deabfe7cd17f7f20c2f4fb01b88a5171b9ff9c5fa1c1d7136ba8b99b2b7d"
+  },
+  "nodeGroups": [],
+  "id": "7dBDf68yVoCDpvLb",
+  "tags": []
+}
